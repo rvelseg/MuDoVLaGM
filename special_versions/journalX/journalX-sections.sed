@@ -1,0 +1,9 @@
+s/\\ref{sec:equations}/II%\\ref{sec:equations}\n/
+s/\\ref{sec:numerical}/III%\\ref{sec:numerical}\n/
+s/\\ref{sec:results}/IV%\\ref{sec:results}\n/
+s/\\ref{sec:disc-concl}/V%\\ref{sec:disc-concl}\n/
+s/\\ref{sec:appendix}/A%\\ref{sec:appendix}\n/
+s/\\ref{sec:roe}/III.B%\\ref{sec:roe}\n/
+s/\\ref{sec:agains-analyt-solut}/IV.A%\\ref{sec:agains-analyt-solut}\n/
+s/\\ref{sec:agains-anoth-numer}/IV.B%\\ref{sec:agains-anoth-numer}\n/
+s/\\ref{sec:performance}/IV.C%\\ref{sec:performance}\n/

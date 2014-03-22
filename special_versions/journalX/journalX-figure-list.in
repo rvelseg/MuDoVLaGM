@@ -1,0 +1,21 @@
+\newpage
+
+\textbf{List of figures}
+
+\begin{description}
+\item[Figure 1] {Taylor shock, upper view, numeric solution for $\theta_T = \pi/8$, $\eta=82$ and $t=100$ (color online).}
+
+\item[Figure 2] {Taylor shock, transverse cut for $\theta_T=\pi/8$ at $t=100$, numeric and analytic solutions for different values of $\eta$ and $\nu_W$ (color online).}
+
+\item[Figure 3] {Taylor shock, error $E$ for different values of $\theta_T$, $\eta$ and $\nu_W$ (color online).}
+
+\item[Figure 4] {Focused wave, upper view of numeric results for $q^1-1$,  with $a=30$, and a) $t=20$, b) $t=40$, c) $t=60$, d)  $t=80$. Scale for $q_1-1$ is compressed to make edge waves more visible (color online).}
+
+\item[Figure 5] {Focused wave, on axis pressure maximum for $a=10$, $\eta=82$, and different values of $\nu_W$. Reference values taken from Albin {\em et al.}\cite{albin} (color online).}
+
+\item[Figure 6] {Focused wave, on axis pressure maximum for $a=20$, $\eta=82$, and different values of $\nu_W$. Reference values taken from Albin {\em et al.}\cite{albin} (color online).}
+
+\item[Figure 7] {Focused wave, on axis pressure maximum for $a=30$, $\eta=82$, and different values of $\nu_W$. Reference values taken from Albin {\em et al.}\cite{albin} (color online).}
+
+\item[Figure 8] {Focused wave, error for different values of $a$, $\nu_W$, and $\eta$ (color online).}
+\end{description}

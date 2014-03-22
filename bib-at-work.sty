@@ -1,0 +1,144 @@
+% code taken from 
+% http://tex.stackexchange.com/questions/123093/replacing-with-citation-key-and-or-making-list-of-unresolved-references-in-nat
+
+%\usepackage[comma]{natbib}
+
+\bibpunct{[}{]}{;}{a}{}{,}
+
+\makeatletter
+\let\oldcitation\citation
+\def\xcomma{}
+\def\bibList{}
+\def\citation#1{%
+    \@for\xx:=#1\do{%
+      \expandafter\ifx\csname bbl@\xx\endcsname\relax%
+        \expandafter\gdef\csname bbl@\xx\endcsname{0}%
+        \xdef\bibList{\bibList\xcomma\xx}%
+        \def\xcomma{,}%
+      \fi%
+    }%
+    \oldcitation{#1}%
+}
+\AtEndDocument{\@bsphack
+  \protected@write\@auxout{}%
+         {\string\BibList{\bibList}}%
+  \@esphack}
+\def\xComma{}
+\def\biblostkeys{}
+\def\BibList#1{%
+   \@for\xx:=#1\do{%
+      \expandafter\ifx\csname BBL@\xx\endcsname\relax%
+        \xdef\biblostkeys{\biblostkeys\xComma\xx}%
+        \def\xComma{,\space}%
+      \fi%
+   }%
+}
+\def\refnotcalled{}
+\def\Xcomma{}
+\let\oldbibcite\bibcite
+\def\bibcite#1{%
+   \expandafter\gdef\csname BBL@#1\endcsname{0}%
+   \expandafter\ifx\csname bbl@#1\endcsname\relax% Not cited
+     \xdef\refnotcalled{\refnotcalled\Xcomma#1}%
+     \def\Xcomma{,\space}%
+   \fi%
+   \oldbibcite{#1}%
+}
+\def\NAT@citex%
+  [#1][#2]#3{%
+  \NAT@reset@parser
+  \NAT@sort@cites{#3}%
+  \NAT@reset@citea
+  \@cite{\let\NAT@nm\@empty\let\NAT@year\@empty
+    \@for\@citeb:=\NAT@cite@list\do
+    {\@safe@activestrue
+     \edef\@citeb{\expandafter\@firstofone\@citeb\@empty}%
+     \@safe@activesfalse
+     \@ifundefined{b@\@citeb\@extra@b@citeb}{\@citea%
+       {\reset@font\bfseries\@citeb}\NAT@citeundefined
+                 \PackageWarning{natbib}%
+       {Citation `\@citeb' on page \thepage \space undefined}\def\NAT@date{}}%
+     {\let\NAT@last@nm=\NAT@nm\let\NAT@last@yr=\NAT@year
+      \NAT@parse{\@citeb}%
+      \ifNAT@longnames\@ifundefined{bv@\@citeb\@extra@b@citeb}{%
+        \let\NAT@name=\NAT@all@names
+        \global\@namedef{bv@\@citeb\@extra@b@citeb}{}}{}%
+      \fi
+     \ifNAT@full\let\NAT@nm\NAT@all@names\else
+       \let\NAT@nm\NAT@name\fi
+     \ifNAT@swa\ifcase\NAT@ctype
+       \if\relax\NAT@date\relax
+         \@citea\NAT@hyper@{\NAT@nmfmt{\NAT@nm}\NAT@date}%
+       \else
+         \ifx\NAT@last@nm\NAT@nm\NAT@yrsep
+            \ifx\NAT@last@yr\NAT@year
+              \def\NAT@temp{{?}}%
+              \ifx\NAT@temp\NAT@exlab\PackageWarningNoLine{natbib}%
+               {Multiple citation on page \thepage: same authors and
+               year\MessageBreak without distinguishing extra
+               letter,\MessageBreak appears as question mark}\fi
+              \NAT@hyper@{\NAT@exlab}%
+            \else\unskip\NAT@spacechar
+              \NAT@hyper@{\NAT@date}%
+            \fi
+         \else
+           \@citea\NAT@hyper@{%
+             \NAT@nmfmt{\NAT@nm}%
+             \hyper@natlinkbreak{%
+               \NAT@aysep\NAT@spacechar}{\@citeb\@extra@b@citeb
+             }%
+             \NAT@date
+           }%
+         \fi
+       \fi
+     \or\@citea\NAT@hyper@{\NAT@nmfmt{\NAT@nm}}%
+     \or\@citea\NAT@hyper@{\NAT@date}%
+     \or\@citea\NAT@hyper@{\NAT@alias}%
+     \fi \NAT@def@citea
+     \else
+       \ifcase\NAT@ctype
+        \if\relax\NAT@date\relax
+          \@citea\NAT@hyper@{\NAT@nmfmt{\NAT@nm}}%
+        \else
+         \ifx\NAT@last@nm\NAT@nm\NAT@yrsep
+            \ifx\NAT@last@yr\NAT@year
+              \def\NAT@temp{{?}}%
+              \ifx\NAT@temp\NAT@exlab\PackageWarningNoLine{natbib}%
+               {Multiple citation on page \thepage: same authors and
+               year\MessageBreak without distinguishing extra
+               letter,\MessageBreak appears as question mark}\fi
+              \NAT@hyper@{\NAT@exlab}%
+            \else
+              \unskip\NAT@spacechar
+              \NAT@hyper@{\NAT@date}%
+            \fi
+         \else
+           \@citea\NAT@hyper@{%
+             \NAT@nmfmt{\NAT@nm}%
+             \hyper@natlinkbreak{\NAT@spacechar\NAT@@open\if*#1*\else#1\NAT@spacechar\fi}%
+               {\@citeb\@extra@b@citeb}%
+             \NAT@date
+           }%
+         \fi
+        \fi
+       \or\@citea\NAT@hyper@{\NAT@nmfmt{\NAT@nm}}%
+       \or\@citea\NAT@hyper@{\NAT@date}%
+       \or\@citea\NAT@hyper@{\NAT@alias}%
+       \fi
+       \if\relax\NAT@date\relax
+         \NAT@def@citea
+       \else
+         \NAT@def@citea@close
+       \fi
+     \fi
+     }}\ifNAT@swa\else\if*#2*\else\NAT@cmt#2\fi
+     \if\relax\NAT@date\relax\else\NAT@@close\fi\fi}{#1}{#2}}
+
+%%%%
+
+
+%\let\oldcite\cite
+%\renewcommand{\cite}[1]{[\oldcite{#1}]}
+%\renewcommand{\cite}[1]{[[#1]]}
+
+\renewcommand{\cite}[1]{\citep{#1}}
