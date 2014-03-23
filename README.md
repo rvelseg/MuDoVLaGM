@@ -87,22 +87,23 @@ between a pair `MDbegin*` `MDend*`, i.e.
 A couple of examples of recipes for special versions are given in the
 present `Makefile`.
 
-# Using this for your own document and own versions
+# Using these scripts for your own document and own versions
 
 Contents of the provided file `document.tex` are mainly an example for
 the use of these scripts. Then, what you could do to use these scripts
-for your own documents is rename `document.tex` to `example.tex`
+for your own document is rename `document.tex` to `example.tex`
 then create a new `document.tex` with your own document, place
 
     %%% \MDbegin{default}
 	
-at the top of your new `document.tex`, and 
+at the top of your new `document.tex`, and place 
 
     %%% \MDend{default}
 	
 after `\documentclass{whatever}` and before `\begin{document}`. Now
-you should be able yo compile it form command line as `make document-default.pdf` 
-or if you simply `make` the same document will
+you should be able yo compile it form command line as 
+`make document-default.pdf`, 
+or if you simply invoke `make`, the same document will
 be produced with the name `document.pdf`.
 
 Then, if you want to add a standard version, say `other`, all you have
@@ -209,9 +210,10 @@ Use `make wipe` to remove everything but source files.
 
 Use `make list` to list the available versions in `document.tex`. 
 
-Use `make all` to make all versions
+Use `make all` to make all versions.
 
-Use `make pack` to make all versions and pack them in a `.tar.gz` file
+Use `make document-all.tar.gz` to make all versions and compress them
+in a single file.
 
 # License
 
