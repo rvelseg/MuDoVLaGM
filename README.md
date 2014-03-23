@@ -87,34 +87,53 @@ between a pair `MDbegin*` `MDend*`, i.e.
 A couple of examples of recipes for special versions are given in the
 present `Makefile`.
 
-# Making your own versions
+# Using this for your own document and own versions
 
-If you want to add a standard version, say `other`, all you have to do
-is add a block
+Contents of the provided file `document.tex` are mainly an example for
+the use of these scripts. Then, what you could do to use these scripts
+for your own documents is rename `document.tex` to `example.tex`
+then create a new `document.tex` with your own document, place
+
+    %%% \MDbegin{default}
+	
+at the top of your new `document.tex`, and 
+
+    %%% \MDend{default}
+	
+after `\documentclass{whatever}` and before `\begin{document}`. Now
+you should be able yo compile it form command line as `make document-default.pdf` 
+or if you simply `make` the same document will
+be produced with the name `document.pdf`.
+
+Then, if you want to add a standard version, say `other`, all you have
+to do is add a block
 
 	%%% \MDbegin{other}
-	% \documentclass{article}
+	% \documentclass{whatever}
 	%%% \MDend{other}
 
 having the `\documentclass` for your version, and maybe some other
 header commands, this block should be placed before the
-`\begin{document}` command. After that, add as many `MDbegin`
-`MDend` blocks as needed, in the body of `document.tex`.
+`\begin{document}` command. You could copy this block from
+`example.tex`. After that, add as many `MDbegin` `MDend` blocks as
+needed, in the body of `document.tex`.
 
 If you want to add a special version, you have to do what you would do
 for a standard version, but adding a `*` symbol in the block that goes
 before `\begin{document}` like this
 
 	%%% \MDbegin*{other}
-	% \documentclass{article}
+	% \documentclass{whatever}
 	%%% \MDend*{other}
 	
 other blocks in the body of `document.tex` don't need the `*`
 symbol. After that, you have to write a recipe in the `Makefile`, say
-for `other.zip`. And see the code for general recipes `clean` `all`,
-`pack`, etc. in case you want to place something there.  I recommend
-to create a directories under `special_versions`, and place there all
-the extra information needed for these versions.
+for `document-other.pdf`. Note that my recipes for special versions
+also generate a zip file `other.zip`, that is the actual file to be
+uploaded. And see the code for general recipes `clean` `all`, `pack`,
+etc. in case you want to place something there.  I recommend to create
+a directories under `special_versions`, and place there all the extra
+information needed for these versions.
 
 # System Requirements
 
@@ -133,7 +152,6 @@ A LaTeX distribution to execute the following commands
 
 A few extra tools 
 
-* pdfcrop
 * zip
 
 Some LaTeX packages to build the example

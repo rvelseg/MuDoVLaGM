@@ -247,7 +247,7 @@ references.bib ;
 	mv tmpdir-journalX/document-journalX.pdf .
 
 document-all.tar.gz : all
-	tar -czf document-all.tar.gz document.pdf $(STANDARD_VERSIONS_PDF) arXiv.zip document-arXiv.pdf journalX.zip document-journalX.pdf
+	tar -czf document-all.tar.gz document.pdf $(STANDARD_VERSIONS_PDF) $(SPECIAL_VERSIONS_PDF) $(SPECIAL_VERSIONS_ZIP)
 
 #################
 # Phony targets
