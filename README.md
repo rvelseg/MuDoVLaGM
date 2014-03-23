@@ -130,11 +130,13 @@ before `\begin{document}` like this
 other blocks in the body of `document.tex` don't need the `*`
 symbol. After that, you have to write a recipe in the `Makefile`, say
 for `document-other.pdf`. Note that my recipes for special versions
-also generate a zip file `other.zip`, that is the actual file to be
-uploaded. And see the code for general recipes `clean` `all`, `pack`,
-etc. in case you want to place something there.  I recommend to create
-a directories under `special_versions`, and place there all the extra
-information needed for these versions.
+also generate a zip file `other.zip`, in the case publisher requires
+source files (as they normally would), these source files (without
+unnecesary format commands for other versions) are packed in this zip
+file. Finally, see the code for general recipes `clean`, `all`,
+`document-all.tar.gz`, etc. in case you want to place something there.
+I recommend to create directories under `special_versions`, and place
+there all the extra information needed for these versions.
 
 # System Requirements
 
